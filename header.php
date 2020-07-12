@@ -10,15 +10,25 @@
     <title>FINELIA</title>
 
     <!-- Flocon CSS -->
-    <link rel="stylesheet" href="../style/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
 
 </head>
 <body>
 <header>
+
+
+    <div class="navT">
+
     <nav class="navbar navbar-dark bg-primary">
-        <!-- Navbar content -->
-        <li><p>test</p></li>
+        <a style="text-decoration: none;" href="index.php"><h2 style="color: white; " >FINELIANOTE</h2></a>
+        <ul>
+            <a class="nav" href="index.php">Accueil</a>
+            <a class="nav" href="moyenne.php">Moyenne</a>
+            <a class="nav" href="preForm.php">Formulaire</a>
+        </ul>
     </nav>
+    </div>
 
 
 </header>

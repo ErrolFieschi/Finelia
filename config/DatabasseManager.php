@@ -1,8 +1,7 @@
 <?php
 
 ini_set('display_errors', 1);
-
-require_once __DIR__ . 'pdo.env';
+require_once __DIR__ . '/../pdo.env';
 
 class DatabasesManager
 {

@@ -1,18 +1,25 @@
 <?php
 require_once __DIR__ . '/config/DatabasseManager.php';
-require_once __DIR__ . 'pdo.env';
 
 
-
+function selectStudent()
+{
     $dbManager = new DatabasesManager();
     $std = $dbManager->getPdo()->prepare("SELECT * FROM etudiant");
     $std->execute();
+    return $std;
+}
 
+function selectClasses(){
+    $dbManager = new DatabasesManager();
+    $cls = $dbManager->getPdo()->prepare("SELECT * FROM matiere");
+    $cls->execute();
+    return $cls;
+}
 
-    while ($resultat = $std->fetch(PDO::FETCH_ASSOC)) {
-
-        echo $resultat['id'] . "<br>";
-        echo $resultat['name'] . "<br>";
-        echo $resultat['prenom'] . "<br>";
-
-    }
+function specialClasses($name){
+    $dbManager = new DatabasesManager();
+    $scls = $dbManager->getPdo()->prepare("SELECT * FROM matiere WHERE name = ?");
+    $scls->execute([$name]);
+    return $scls;
+}

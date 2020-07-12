@@ -1,0 +1,111 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.3
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : localhost:8889
+-- Généré le :  Dim 12 juil. 2020 à 08:45
+-- Version du serveur :  5.7.26
+-- Version de PHP :  7.4.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de données :  `FINELIA`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `etudiant`
+--
+
+CREATE TABLE `etudiant` (
+  `id` int(11) NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `lastname` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `matiere`
+--
+
+CREATE TABLE `matiere` (
+  `id` int(11) NOT NULL,
+  `name` int(11) NOT NULL,
+  `ects` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `note`
+--
+
+CREATE TABLE `note` (
+  `id` int(11) NOT NULL,
+  `coef` int(11) NOT NULL,
+  `value` int(11) NOT NULL,
+  `fk_matiere` int(11) NOT NULL,
+  `fk_etudiant` int(11) NOT NULL,
+  `year` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `etudiant`
+--
+ALTER TABLE `etudiant`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `matiere`
+--
+ALTER TABLE `matiere`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `note`
+--
+ALTER TABLE `note`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_matiere` (`fk_matiere`),
+  ADD KEY `fk_etudiant` (`fk_etudiant`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `etudiant`
+--
+ALTER TABLE `etudiant`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `matiere`
+--
+ALTER TABLE `matiere`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `note`
+--
+ALTER TABLE `note`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `note`
+--
+ALTER TABLE `note`
+  ADD CONSTRAINT `fk_etudiant` FOREIGN KEY (`fk_etudiant`) REFERENCES `etudiant` (`id`),
+  ADD CONSTRAINT `fk_matiere` FOREIGN KEY (`fk_matiere`) REFERENCES `matiere` (`id`);
