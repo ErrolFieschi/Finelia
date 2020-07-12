@@ -28,8 +28,8 @@ if (!empty($_POST['coef']) && isset($_POST['coef']) && !empty($_POST['classes_se
         <tbody>
         <tr>
             <th scope="row"><?= $result["id"] ?></th>
-            <td><?= $result["name"] ?></td>
             <td><?= $result["lastname"] ?></td>
+            <td><?= $result["name"] ?></td>
             <td>
                 <div class="col-2">
                     <input type="text" class="form-control" name="mark[]">

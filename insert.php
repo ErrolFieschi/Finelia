@@ -16,14 +16,21 @@ $reqClasses = specialClasses($_GET['classes']);
 while ($result= $reqClasses->fetch(PDO::FETCH_ASSOC)) {
     $fk_matiere = $result['id'];
 }
+
 $notation[] = ($_POST['mark']);
 $coef = $_GET['coef'];
 
-$fk_etudiant = 2;
+$reqStudent = selectStudent();
+while($student = $reqStudent->fetch(PDO::FETCH_ASSOC)){
+    $std[] = $student['id'];
+}
 $year = "2020-10-10";
+
 foreach ($notation as $item){
+    $j = 0;
     foreach ($item as $i){
-        $row[] = "(" . $coef . "," . $i . ","  . $fk_matiere . "," . $fk_etudiant .  ','. "'" . $year . "'" . ')';
+        $row[] = "(" . $coef . "," . $i . ","  . $fk_matiere . "," . $std[$j] .  ','. "'" . $year . "'" . ')';
+        $j++;
     }
 }
 
@@ -33,5 +40,8 @@ $dbManager = new DatabasesManager();
 $insMarks = $dbManager->getPdo()->prepare("INSERT INTO note (coef,value,fk_matiere,fk_etudiant,year) VALUES " . $sqlReq . ";");
 $insMarks->execute();
 
-echo $sqlReq;
-echo "<br>" . $fk_matiere ."<br>" . $coef;
+header('Location: preForm.php?success=ok');
+exit();
+
+//echo $sqlReq;
+//echo "<br>" . $fk_matiere ."<br>" . $coef;
