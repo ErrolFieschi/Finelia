@@ -31,12 +31,12 @@ include('select.php');
             $tmpMoyenne = 0;
             $coefDiv = 0;
 
-            $reqMatiere = $dbManager->getPdo()->prepare("SELECT id,ects FROM matiere");
-            $reqMatiere->execute();
-
-            while ($rMatiere = $reqMatiere->fetch()) {
-                $total_coef += $rMatiere['ects'];
+            $reqTotalCoef = $dbManager->getPdo()->prepare("SELECT id,ects FROM matiere");
+            $reqTotalCoef->execute();
+            while ($rTotalCoef = $reqTotalCoef->fetch()) {
+                $total_coef += $rTotalCoef['ects'];
             }
+
             $classe = $dbManager->getPdo()->prepare("SELECT id,ects FROM matiere");
             $classe->execute();
             while ($classroom = $classe->fetch()) {
@@ -44,40 +44,37 @@ include('select.php');
                 $idClasses[] = $classroom['id'];
                 $ectsMatiere[] = $classroom['ects'];
 
-                }
+            }
 
             $etudiant = $dbManager->getPdo()->prepare("SELECT * FROM etudiant");
             $etudiant->execute();
             while ($reqEtudiant = $etudiant->fetch()) {
 
-
-
                 $idStudent = $reqEtudiant['id'];
 
+                $reqMatiere = $dbManager->getPdo()->prepare("SELECT id,ects FROM matiere");
+                $reqMatiere->execute();
 
-                for($i=0 ; $i<count($idClasses) ; $i++){
+                while ($rMatiere = $reqMatiere->fetch()) {
+                    $total_coef += $rMatiere['ects'];
 
-                $idC = $idClasses[$i];
+                    $note = $dbManager->getPdo()->prepare("SELECT * FROM note WHERE fk_etudiant = ?  AND fk_matiere = ?  ");
+                    $note->execute([$idStudent, $rMatiere['id']]);
+
+                    while ($notation = $note->fetch()) {
+
+                        $moyenne += $notation['value'] * $notation['coef'];
+                        $coefDiv += $notation['coef'];
 
 
-                    $note= $dbManager->getPdo()->prepare("SELECT * FROM note WHERE fk_etudiant = ?  AND fk_matiere = ?  ");
-                    $note->execute([$idStudent, $idC]);
+                    }
 
-
-                        while ($notation = $note->fetch()) {
-
-                            $moyenne += ($notation['value'] * $notation['coef']);
-                            $coefDiv += $notation['coef'];
-
-                        }
+                    //$moyenne = $moyenne * $rMatiere['ects'];
                 }
-                echo  $tmpMoyenne = $moyenne / $coefDiv . "<br>";
-                //echo $tmpMoyenne = $moyenne / $coefDiv;
 
-               // echo "<br>";
-               // echo $moyenne /= $coefDiv . "<br>";
-                //$finish = $toto / $totalCoef;
-               // echo $finish . "<br>";
+                echo $tmpMoyenne = ($moyenne / $coefDiv ) . "<br>";
+                $moyenne = 0;
+                $coefDiv = 0;
             }
 
             ?></td>
