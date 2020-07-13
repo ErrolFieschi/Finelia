@@ -21,10 +21,12 @@ include('select.php');
     ?>
     <tbody>
     <tr>
-        <th scope="row"><?= $result["lastname"] ?></th>
+        <th scope="row"><a href="personalSum.php?<?= $result['id'] ?>"><?= $result["lastname"] ?></a></th>
         <td><?= $result["name"] ?></td>
-        <td>wait</td>
-        <td><?=sumCalcul($result['id'])?></td>
+        <td>0</td>
+        <td><?php
+           echo sumCalcul($result['id']);
+            ?></td>
     </tr>
     <?php
     } ?>
