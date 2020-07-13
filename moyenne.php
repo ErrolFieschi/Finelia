@@ -11,7 +11,6 @@ include('select.php');
     <tr>
         <th scope="col">NOM</th>
         <th scope="col">PRÉNOM</th>
-        <th scope="col">ECTS</th>
         <th scope="col">MOYENNE</th>
     </tr>
     </thead>
@@ -21,9 +20,8 @@ include('select.php');
     ?>
     <tbody>
     <tr>
-        <th scope="row"><a href="personalSum.php?<?= $result['id'] ?>"><?= $result["lastname"] ?></a></th>
+        <th scope="row"><a href="personalSum.php?id=<?= $result['id'] ?>"><?= $result["lastname"] ?></a></th>
         <td><?= $result["name"] ?></td>
-        <td>0</td>
         <td><?php
            echo sumCalcul($result['id']);
             ?></td>

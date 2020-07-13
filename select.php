@@ -35,16 +35,16 @@ function sumCalcul($id){
             $sumResult += $moy['coef'] * $moy['value'];
             $moyCoef += $moy['coef'];
         }
-        $sumResult /= ($moyCoef );
+        $sumResult /= $moyCoef ;
         return round($sumResult, 2);
     }else{
         return "aucune note";
     }
 }
 
-function tmpSum(){
+function personalMarks($id){
     $dbManager = new DatabasesManager();
-    $sum = $dbManager->getPdo()->prepare("SELECT coef,value FROM note WHERE fk_etudiant = 1");
-    $sum->execute([]);
-    return $sum;
+    $marks = $dbManager->getPdo()->prepare("SELECT * FROM note WHERE fk_etudiant = ? ORDER BY fk_matiere");
+    $marks->execute([$id]);
+    return $marks;
 }
