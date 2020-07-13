@@ -1,0 +1,123 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.3
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : localhost:8889
+-- Généré le :  lun. 13 juil. 2020 à 15:18
+-- Version du serveur :  5.7.26
+-- Version de PHP :  7.4.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de données :  `FINELIA`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `note`
+--
+
+CREATE TABLE `note` (
+  `id` int(11) NOT NULL,
+  `coef` int(11) NOT NULL,
+  `value` int(11) NOT NULL,
+  `fk_matiere` int(11) NOT NULL,
+  `fk_etudiant` int(11) NOT NULL,
+  `year` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `note`
+--
+
+INSERT INTO `note` (`id`, `coef`, `value`, `fk_matiere`, `fk_etudiant`, `year`) VALUES
+(64, 1, 10, 2, 1, '2020-10-10'),
+(65, 1, 10, 2, 2, '2020-10-10'),
+(66, 1, 11, 2, 3, '2020-10-10'),
+(67, 1, 9, 2, 4, '2020-10-10'),
+(68, 1, 9, 2, 5, '2020-10-10'),
+(69, 1, 11, 2, 6, '2020-10-10'),
+(70, 1, 8, 2, 7, '2020-10-10'),
+(71, 1, 17, 2, 8, '2020-10-10'),
+(72, 1, 12, 2, 9, '2020-10-10'),
+(73, 2, 13, 3, 1, '2020-10-10'),
+(74, 2, 10, 3, 2, '2020-10-10'),
+(75, 2, 7, 3, 3, '2020-10-10'),
+(76, 2, 3, 3, 4, '2020-10-10'),
+(77, 2, 2, 3, 5, '2020-10-10'),
+(78, 2, 1, 3, 6, '2020-10-10'),
+(79, 2, 19, 3, 7, '2020-10-10'),
+(80, 2, 2, 3, 8, '2020-10-10'),
+(81, 2, 18, 3, 9, '2020-10-10'),
+(82, 1, 10, 1, 1, '2020-10-10'),
+(83, 1, 2, 1, 2, '2020-10-10'),
+(84, 1, 3, 1, 3, '2020-10-10'),
+(85, 1, 6, 1, 4, '2020-10-10'),
+(86, 1, 5, 1, 5, '2020-10-10'),
+(87, 1, 12, 1, 6, '2020-10-10'),
+(88, 1, 11, 1, 7, '2020-10-10'),
+(89, 1, 12, 1, 8, '2020-10-10'),
+(90, 1, 11, 1, 9, '2020-10-10'),
+(91, 1, 12, 4, 1, '2020-10-10'),
+(92, 1, 10, 4, 2, '2020-10-10'),
+(93, 1, 20, 4, 3, '2020-10-10'),
+(94, 1, 10, 4, 4, '2020-10-10'),
+(95, 1, 12, 4, 5, '2020-10-10'),
+(96, 1, 10, 4, 6, '2020-10-10'),
+(97, 1, 11, 4, 7, '2020-10-10'),
+(98, 1, 11, 4, 8, '2020-10-10'),
+(99, 1, 2, 4, 9, '2020-10-10'),
+(100, 5, 12, 5, 1, '2020-10-10'),
+(101, 5, 11, 5, 2, '2020-10-10'),
+(102, 5, 9, 5, 3, '2020-10-10'),
+(103, 5, 15, 5, 4, '2020-10-10'),
+(104, 5, 12, 5, 5, '2020-10-10'),
+(105, 5, 18, 5, 6, '2020-10-10'),
+(106, 5, 19, 5, 7, '2020-10-10'),
+(107, 5, 2, 5, 8, '2020-10-10'),
+(108, 5, 3, 5, 9, '2020-10-10'),
+(109, 1, 15, 6, 1, '2020-10-10'),
+(110, 1, 12, 6, 2, '2020-10-10'),
+(111, 1, 11, 6, 3, '2020-10-10'),
+(112, 1, 15, 6, 4, '2020-10-10'),
+(113, 1, 16, 6, 5, '2020-10-10'),
+(114, 1, 17, 6, 6, '2020-10-10'),
+(115, 1, 11, 6, 7, '2020-10-10'),
+(116, 1, 12, 6, 8, '2020-10-10'),
+(117, 1, 11, 6, 9, '2020-10-10');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `note`
+--
+ALTER TABLE `note`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_matiere` (`fk_matiere`),
+  ADD KEY `fk_etudiant` (`fk_etudiant`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `note`
+--
+ALTER TABLE `note`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `note`
+--
+ALTER TABLE `note`
+  ADD CONSTRAINT `fk_etudiant` FOREIGN KEY (`fk_etudiant`) REFERENCES `etudiant` (`id`),
+  ADD CONSTRAINT `fk_matiere` FOREIGN KEY (`fk_matiere`) REFERENCES `matiere` (`id`);

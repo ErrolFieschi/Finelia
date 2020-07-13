@@ -63,16 +63,15 @@ include('select.php');
 
                     while ($notation = $note->fetch()) {
 
+                        $info += 1;
                         $moyenne += $notation['value'] * $notation['coef'];
                         $coefDiv += $notation['coef'];
 
-
                     }
-
-                    //$moyenne = $moyenne * $rMatiere['ects'];
+                    $moyenne += $moyenne * $rMatiere['ects'];
                 }
-
-                echo $tmpMoyenne = ($moyenne / $coefDiv ) . "<br>";
+                $info = 0;
+                echo $tmpMoyenne = ($moyenne / $coefDiv ) /( $total_coef * 6 ). "<br>";
                 $moyenne = 0;
                 $coefDiv = 0;
             }
